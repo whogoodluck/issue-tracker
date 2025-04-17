@@ -9,14 +9,6 @@ interface ErrorType extends Error {
 
 const getErrorResponse = (err: ErrorType) => {
   const types: Record<string, { statusCode: number; message: string }> = {
-    CastError: {
-      statusCode: 400,
-      message: 'malformatted id'
-    },
-    ValidationError: {
-      statusCode: 422,
-      message: err.isJoi && err.details ? err.details[0].message : 'validation failed'
-    },
     HttpError: {
       statusCode: err.statusCode || 500,
       message: err.message
