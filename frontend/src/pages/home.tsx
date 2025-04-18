@@ -61,8 +61,8 @@ function Home() {
   }
 
   return (
-    <section className='p-4'>
-      <div className='flex items-center justify-between gap-4 px-8'>
+    <section className='p-4 md:px-12'>
+      <div className='flex items-center justify-between gap-4'>
         <h1 className='text-primary text-3xl font-semibold'></h1>
         <div className='flex gap-4'>
           <Select onValueChange={handleSelectStatus}>
