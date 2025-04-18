@@ -1,11 +1,19 @@
-import { Button } from './components/ui/button'
+import { Route, Routes } from 'react-router-dom'
+
+import Header from './components/common/header'
+import Home from './pages/home'
+import NotFoundPage from './pages/not-found'
+import { IssueProvider } from './providers/issue-provider'
 
 function App() {
   return (
-    <div className='flex h-screen flex-col items-center justify-center'>
-      <h1 className='text-3xl font-bold text-gray-500'>Issue Tracker</h1>
-      <Button>Click me</Button>
-    </div>
+    <IssueProvider>
+      <Header />
+      <Routes>
+        <Route path={'/'} element={<Home />} />
+        <Route path={'*'} element={<NotFoundPage />} />
+      </Routes>
+    </IssueProvider>
   )
 }
 
