@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getIssues } from '@/actions/issue'
 import { useIssue } from '@/providers/issue-provider'
-import { NavLink } from 'react-router-dom'
 
 import IssueCard from '@/components/issue-card'
 import Loader from '@/components/loader'
@@ -32,7 +31,7 @@ function Home() {
       ) : (
         <div className='flex w-full flex-col gap-4 py-4'>
           {issues.map((issue, index) => (
-            <IssueCard key={index} issue={issue} />
+              <IssueCard key={index} issue={issue} />
           ))}
         </div>
       )}

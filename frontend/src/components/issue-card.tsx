@@ -1,4 +1,5 @@
 import { Dot } from 'lucide-react'
+import { NavLink } from 'react-router-dom'
 
 import { Issue } from '@/types/issue'
 import { cn, formatTimeAgo } from '@/lib/utils'
@@ -26,20 +27,24 @@ function IssueCard({ issue }: IssueCardProps) {
   return (
     <Card className=''>
       <CardHeader className='flex items-center justify-between'>
-        <CardTitle className='line-clamp-2'>{issue.title}</CardTitle>
+        <NavLink to={`/issues/${issue.id}`}>
+          <CardTitle className='line-clamp-2'>{issue.title}</CardTitle>
+        </NavLink>
         <ManageIssue issue={issue} />
       </CardHeader>
       <CardContent>
-        <article className='text-muted-foreground line-clamp-3 text-sm'>
-          {issue.description}
-        </article>
+        <NavLink to={`/issues/${issue.id}`}>
+          <article className='text-muted-foreground line-clamp-3 text-sm'>
+            {issue.description}
+          </article>{' '}
+        </NavLink>
       </CardContent>
       <CardFooter className='flex items-center gap-2'>
         <div
           className={cn(
-            'flex items-center text-sm font-semibold text-[#28a745]',
+            'flex items-center text-sm font-semibold text-[#0a4ad3]',
             {
-              'text-[#fd7e14]': issue.status === Status.IN_PROGRESS,
+              'text-[#28a745]': issue.status === Status.IN_PROGRESS,
               'text-[#6c757d]': issue.status === Status.CLOSED
             }
           )}
@@ -49,10 +54,10 @@ function IssueCard({ issue }: IssueCardProps) {
         </div>
         <div
           className={cn(
-            'flex items-center text-sm font-semibold text-[#17a2b8]',
+            'flex items-center text-sm font-semibold text-[#0f766e]',
             {
-              'text-[#6495ED]': issue.priority === Priority.MEDIUM,
-              'text-[#ff5722]': issue.priority === Priority.HIGH
+              'text-[#f5a511]': issue.priority === Priority.MEDIUM,
+              'text-[#dc2626]': issue.priority === Priority.HIGH
             }
           )}
         >

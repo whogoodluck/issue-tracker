@@ -16,7 +16,7 @@ function Header() {
           to={location.pathname === '/create' ? '/' : '/create'}
           className={cn(buttonVariants({ variant: 'secondary' }))}
         >
-          {location.pathname !== '/' ? 'Go Home' : 'Create Issue'}
+          {location.pathname !== '/create' ? 'Create Issue' : 'Go Home'}
         </NavLink>
       </div>
     </header>
