@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { deleteIssue } from '@/actions/issue'
 import { useIssue } from '@/providers/issue-provider'
 import { EditIcon, Ellipsis, Loader2Icon, Trash2 } from 'lucide-react'
+import toast from 'react-hot-toast'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import { Issue } from '@/types/issue'
 import { cn } from '@/lib/utils'
@@ -35,14 +37,18 @@ import {
 function ManageIssue({ issue }: { issue: Issue }) {
   const [isDeleting, setIsDeleting] = useState(false)
   const { issues, setIssues } = useIssue()
+  const location = useLocation()
+  const navigate = useNavigate()
 
   const handleDeleteTask = async () => {
     try {
       setIsDeleting(true)
       const res = await deleteIssue(issue.id)
       setIssues(issues.filter(issue => issue.id !== res.issue.id))
-    } catch (err) {
-      console.log(err)
+      if (location.pathname !== '/') navigate('/')
+      toast.success('Issue deleted successfully.')
+    } catch {
+      toast.error('Something went wrong, please try again.')
     } finally {
       setIsDeleting(false)
     }

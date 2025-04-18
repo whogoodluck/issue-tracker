@@ -9,6 +9,7 @@ import {
 } from '@/validators/issue-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
 import { Issue } from '@/types/issue'
@@ -65,9 +66,10 @@ function IssueForm({ formType = 'create', issue }: IssueFormProps) {
 
       const res = await createIssue(data)
       setIssues([res.issue, ...issues])
+      toast.success(`Issue ${formType}d successfully.`)
       navigate('/')
-    } catch (error) {
-      console.log(error)
+    } catch {
+      toast.error('Something went wrong, please try again.')
     } finally {
       setIsPending(false)
     }

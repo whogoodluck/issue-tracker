@@ -41,7 +41,7 @@ function Home() {
       const res = await getIssues({ status: value, priority })
       setIssues(res.issues)
     } catch (error) {
-      console.log(error)
+      console.log('err', error)
     } finally {
       setIsLoading(false)
     }
@@ -54,7 +54,7 @@ function Home() {
       const res = await getIssues({ status, priority: value })
       setIssues(res.issues)
     } catch (error) {
-      console.log(error)
+      console.log('err', error)
     } finally {
       setIsLoading(false)
     }

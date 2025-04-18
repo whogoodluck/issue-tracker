@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast'
 import { Route, Routes } from 'react-router-dom'
 
 import Header from './components/common/header'
@@ -17,6 +18,7 @@ function App() {
         <Route path={'/create'} element={<CreateIssuePage />} />
         <Route path={'*'} element={<NotFoundPage />} />
       </Routes>
+      <Toaster />
     </IssueProvider>
   )
 }
