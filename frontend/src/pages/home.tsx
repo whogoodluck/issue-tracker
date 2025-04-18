@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getIssues } from '@/actions/issue'
 import { useIssue } from '@/providers/issue-provider'
+import { NavLink } from 'react-router-dom'
 
 import IssueCard from '@/components/issue-card'
 import Loader from '@/components/loader'

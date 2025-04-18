@@ -1,5 +1,4 @@
 import { Dot } from 'lucide-react'
-import { Link } from 'react-router-dom'
 
 import { Issue } from '@/types/issue'
 import { cn, formatTimeAgo } from '@/lib/utils'
@@ -27,17 +26,13 @@ function IssueCard({ issue }: IssueCardProps) {
   return (
     <Card className=''>
       <CardHeader className='flex items-center justify-between'>
-        <Link to={`/issues/${issue.id}`}>
-          <CardTitle className='line-clamp-2'>{issue.title}</CardTitle>
-        </Link>
+        <CardTitle className='line-clamp-2'>{issue.title}</CardTitle>
         <ManageIssue issue={issue} />
       </CardHeader>
       <CardContent>
-        <Link to={`/tasks/${issue.id}`}>
-          <article className='text-muted-foreground line-clamp-3 text-sm'>
-            {issue.description}
-          </article>
-        </Link>
+        <article className='text-muted-foreground line-clamp-3 text-sm'>
+          {issue.description}
+        </article>
       </CardContent>
       <CardFooter className='flex items-center gap-2'>
         <div

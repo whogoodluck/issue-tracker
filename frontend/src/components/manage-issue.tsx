@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { deleteIssue } from '@/actions/issue'
 import { useIssue } from '@/providers/issue-provider'
-import { Ellipsis, Loader2Icon, Trash2 } from 'lucide-react'
+import { EditIcon, Ellipsis, Loader2Icon, Trash2 } from 'lucide-react'
 
 import { Issue } from '@/types/issue'
 import { cn } from '@/lib/utils'
@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 
+import IssueForm from './issue-form'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,6 +24,13 @@ import {
   AlertDialogTrigger
 } from './ui/alert-dialog'
 import { buttonVariants } from './ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger
+} from './ui/dialog'
 
 function ManageIssue({ issue }: { issue: Issue }) {
   const [isDeleting, setIsDeleting] = useState(false)
@@ -43,8 +51,8 @@ function ManageIssue({ issue }: { issue: Issue }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className='cursor-pointer outline-none'>
-          <Ellipsis className='h-[1.2rem] w-[1.2rem] scale-100 rotate-0' />
+        <button className='text-primary cursor-pointer outline-none'>
+          <Ellipsis strokeWidth={3} className='' />
           <span className='sr-only'>Toggle task menu</span>
         </button>
       </DropdownMenuTrigger>
@@ -84,6 +92,18 @@ function ManageIssue({ issue }: { issue: Issue }) {
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
+
+        <Dialog>
+          <DialogTrigger className='flex cursor-pointer items-center gap-2'>
+            <EditIcon size={16} /> Edit
+          </DialogTrigger>
+          <DialogContent>
+            <DialogTitle className='text-center'>Update Issue</DialogTitle>
+            <DialogDescription>
+              <IssueForm formType='update' issue={issue} />
+            </DialogDescription>
+          </DialogContent>
+        </Dialog>
       </DropdownMenuContent>
     </DropdownMenu>
   )
