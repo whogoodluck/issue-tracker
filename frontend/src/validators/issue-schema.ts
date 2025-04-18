@@ -15,10 +15,10 @@ export enum Priority {
 }
 
 export const issueFormSchema = z.object({
-  title: requiredString('Title').default(''),
-  description: requiredString('Description').default(''),
-  status: z.nativeEnum(Status).default(Status.OPEN),
-  priority: z.nativeEnum(Priority).default(Priority.MEDIUM)
+  title: requiredString('Title'),
+  description: requiredString('Description'),
+  status: z.nativeEnum(Status),
+  priority: z.nativeEnum(Priority)
 })
 
 export type IssueFormSchema = z.infer<typeof issueFormSchema>
