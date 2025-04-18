@@ -9,7 +9,7 @@ function Header() {
   const location = useLocation()
 
   return (
-    <header className='bg-background fixed top-0 left-0 flex h-24 w-full items-center justify-between px-4 md:px-12'>
+    <header className='bg-background flex h-24 w-full items-center justify-between px-4 md:px-12'>
       <Logo />
       <div>
         <NavLink

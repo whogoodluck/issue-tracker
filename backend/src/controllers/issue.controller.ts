@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import issueService from '../services/issue.service'
 import HttpError from '../utils/http-error'
+import { Priority, Status } from '@/types/issue'
 
 async function createNewIssue(req: Request, res: Response, next: NextFunction) {
   const { title, description, status, priority } = req.body
@@ -12,10 +13,15 @@ async function createNewIssue(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-async function getAllIssues(_req: Request, res: Response, next: NextFunction) {
+async function getAllIssues(req: Request, res: Response, next: NextFunction) {
   try {
-    const issues = await issueService.getAll()
-    res.status(200).json({ message: 'Issues fetched', issues })
+    const { status, priority } = req.query as {
+      status?: Status
+      priority?: Priority
+    }
+
+    const issues = await issueService.getAll({ status, priority })
+    return res.status(200).json({ message: 'Issues fetched', issues })
   } catch (err) {
     next(err)
   }

@@ -1,4 +1,4 @@
-import { IssueFormSchema } from '@/validators/issue-schema'
+import { IssueFormSchema, Priority, Status } from '@/validators/issue-schema'
 import axios from 'axios'
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/api/issues`
@@ -8,7 +8,26 @@ export const createIssue = async (issue: IssueFormSchema) => {
   return response.data
 }
 
-export const getIssues = async () => {
+interface GetIssues {
+  status?: Status
+  priority?: Priority
+}
+
+export const getIssues = async ({ status, priority }: GetIssues) => {
+  if (status && priority) {
+    const response = await axios.get(
+      `${apiUrl}?status=${status}&priority=${priority}`
+    )
+    return response.data
+  }
+  if (status) {
+    const response = await axios.get(`${apiUrl}?status=${status}`)
+    return response.data
+  }
+  if (priority) {
+    const response = await axios.get(`${apiUrl}?priority=${priority}`)
+    return response.data
+  }
   const response = await axios.get(apiUrl)
   return response.data
 }

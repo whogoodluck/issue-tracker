@@ -1,5 +1,5 @@
 import { prisma } from '../lib/db'
-import { Issue } from '../types/issue'
+import { Issue, Priority, Status } from '../types/issue'
 
 async function createNew(issue: Issue) {
   return prisma.issue.create({
@@ -7,8 +7,23 @@ async function createNew(issue: Issue) {
   })
 }
 
-async function getAll() {
-  return prisma.issue.findMany()
+interface GetAll {
+  status?: Status
+  priority?: Priority
+}
+
+async function getAll({ status, priority }: GetAll) {
+  const whereClause: any = {}
+
+  if (status) whereClause.status = status
+  if (priority) whereClause.priority = priority
+
+  return prisma.issue.findMany({
+    where: whereClause,
+    orderBy: {
+      createdAt: 'desc'
+    }
+  })
 }
 
 async function getById(id: number) {

@@ -11,14 +11,12 @@ function App() {
   return (
     <IssueProvider>
       <Header />
-      <div className='mt-24'>
-        <Routes>
-          <Route path={'/'} element={<Home />} />
-          <Route path={'/issues/:id'} element={<IssueDetails />} />
-          <Route path={'/create'} element={<CreateIssuePage />} />
-          <Route path={'*'} element={<NotFoundPage />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path={'/'} element={<Home />} />
+        <Route path={'/issues/:id'} element={<IssueDetails />} />
+        <Route path={'/create'} element={<CreateIssuePage />} />
+        <Route path={'*'} element={<NotFoundPage />} />
+      </Routes>
     </IssueProvider>
   )
 }
